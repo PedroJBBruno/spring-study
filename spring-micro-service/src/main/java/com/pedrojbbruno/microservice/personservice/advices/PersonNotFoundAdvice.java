@@ -1,6 +1,6 @@
-package com.pedrojbbruno.springmicroservice.advices;
+package com.pedrojbbruno.microservice.personservice.advices;
 
-import com.pedrojbbruno.springmicroservice.exceptions.PersonNotFoundException;
+import com.pedrojbbruno.microservice.personservice.exceptions.PersonNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

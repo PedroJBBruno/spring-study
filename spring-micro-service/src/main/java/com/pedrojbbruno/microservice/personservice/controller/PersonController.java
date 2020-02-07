@@ -1,9 +1,9 @@
-package com.pedrojbbruno.springmicroservice.controller;
+package com.pedrojbbruno.microservice.personservice.controller;
 
-import com.pedrojbbruno.springmicroservice.assemblers.PersonRepresentationModelAssembler;
-import com.pedrojbbruno.springmicroservice.entities.Person;
-import com.pedrojbbruno.springmicroservice.exceptions.PersonNotFoundException;
-import com.pedrojbbruno.springmicroservice.repository.PersonRepository;
+import com.pedrojbbruno.microservice.personservice.entities.Person;
+import com.pedrojbbruno.microservice.personservice.assemblers.PersonRepresentationModelAssembler;
+import com.pedrojbbruno.microservice.personservice.exceptions.PersonNotFoundException;
+import com.pedrojbbruno.microservice.personservice.repository.PersonRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;

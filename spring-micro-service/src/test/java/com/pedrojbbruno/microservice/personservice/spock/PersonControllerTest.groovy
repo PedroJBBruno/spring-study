@@ -1,9 +1,7 @@
-package com.pedrojbbruno.springmicroservice.spock
+package com.pedrojbbruno.microservice.personservice.spock
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.pedrojbbruno.springmicroservice.assemblers.PersonRepresentationModelAssembler
-import com.pedrojbbruno.springmicroservice.entities.Person
-import com.pedrojbbruno.springmicroservice.repository.PersonRepository
+import com.pedrojbbruno.microservice.personservice.repository.PersonRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -29,11 +27,11 @@ class PersonControllerTest extends Specification {
     private PersonRepository repository;
 
     @Autowired
-    private PersonRepresentationModelAssembler assembler;
+    private com.pedrojbbruno.microservice.personservice.assemblers.PersonRepresentationModelAssembler assembler;
 
     def "when i post a new person, it shall return 201 and the person created"() {
         given: "i have a new person"
-        Person person = new Person("Pedro",
+        com.pedrojbbruno.microservice.personservice.entities.Person person = new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro",
                 46042432800,
                 "18/10/1997",
                 "rua teste",
@@ -43,7 +41,7 @@ class PersonControllerTest extends Specification {
                 "estado teste",
                 "pais teste")
         repository.save(_) >> person
-        assembler.toModel(person) >> new EntityModel<Person>(person)
+        assembler.toModel(person) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(person)
 
         expect: "to have the Status 201 and the response is the new person"
         mvc.perform(MockMvcRequestBuilders
@@ -57,8 +55,8 @@ class PersonControllerTest extends Specification {
 
     def "when i get all persons, it shall return 200 and the array of persons"() {
         given: "i have a list of persons"
-        List<Person> persons = new ArrayList<>([
-                new Person("Pedro",
+        List<com.pedrojbbruno.microservice.personservice.entities.Person> persons = new ArrayList<>([
+                new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro",
                         46042432800,
                         "18/10/1997",
                         "rua teste",
@@ -67,7 +65,7 @@ class PersonControllerTest extends Specification {
                         100,
                         "estado teste",
                         "pais teste"),
-                new Person("Pedro2",
+                new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro2",
                         46042432800,
                         "18/10/1997",
                         "rua teste",
@@ -76,7 +74,7 @@ class PersonControllerTest extends Specification {
                         100,
                         "estado teste",
                         "pais teste"),
-                new Person("Pedro3",
+                new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro3",
                         46042432800,
                         "18/10/1997",
                         "rua teste",
@@ -87,9 +85,9 @@ class PersonControllerTest extends Specification {
                         "pais teste")
         ]).asList()
         repository.findAll() >> persons
-        assembler.toModel(persons[0]) >> new EntityModel<Person>(persons[0])
-        assembler.toModel(persons[1]) >> new EntityModel<Person>(persons[1])
-        assembler.toModel(persons[2]) >> new EntityModel<Person>(persons[2])
+        assembler.toModel(persons[0]) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(persons[0])
+        assembler.toModel(persons[1]) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(persons[1])
+        assembler.toModel(persons[2]) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(persons[2])
 
         expect: "to have the Status 200 and the response is the person list"
         mvc.perform(MockMvcRequestBuilders
@@ -100,7 +98,7 @@ class PersonControllerTest extends Specification {
 
     def "when i get a person, it shall return 200 and the person"() {
         given: "i have a person"
-        Person person = new Person("Pedro",
+        com.pedrojbbruno.microservice.personservice.entities.Person person = new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro",
                 46042432800,
                 "18/10/1997",
                 "rua teste",
@@ -109,8 +107,8 @@ class PersonControllerTest extends Specification {
                 100,
                 "estado teste",
                 "pais teste")
-        repository.findById(1L) >> new Optional<Person>(person)
-        assembler.toModel(person) >> new EntityModel<Person>(person)
+        repository.findById(1L) >> new Optional<com.pedrojbbruno.microservice.personservice.entities.Person>(person)
+        assembler.toModel(person) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(person)
 
         expect: "to have the Status 200 and the response is the person"
         mvc.perform(MockMvcRequestBuilders
@@ -121,7 +119,7 @@ class PersonControllerTest extends Specification {
 
     def "when i update a person, it shall return 200 and the updated person"() {
         given: "i have a person and its updated version"
-        Person person = new Person("Pedro",
+        com.pedrojbbruno.microservice.personservice.entities.Person person = new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro",
                 46042432800,
                 "18/10/1997",
                 "rua teste",
@@ -130,7 +128,7 @@ class PersonControllerTest extends Specification {
                 100,
                 "estado teste",
                 "pais teste")
-        Person personUpdated = new Person("Augusto",
+        com.pedrojbbruno.microservice.personservice.entities.Person personUpdated = new com.pedrojbbruno.microservice.personservice.entities.Person("Augusto",
                 46042432800,
                 "18/10/1997",
                 "rua teste",
@@ -139,9 +137,9 @@ class PersonControllerTest extends Specification {
                 100,
                 "estado teste",
                 "pais teste")
-        repository.findById(1L) >> new Optional<Person>(person)
+        repository.findById(1L) >> new Optional<com.pedrojbbruno.microservice.personservice.entities.Person>(person)
         repository.save(_) >> personUpdated
-        assembler.toModel(personUpdated) >> new EntityModel<Person>(personUpdated)
+        assembler.toModel(personUpdated) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(personUpdated)
 
         expect: "to have the Status 200 and the response is the new person"
         mvc.perform(MockMvcRequestBuilders
@@ -155,7 +153,7 @@ class PersonControllerTest extends Specification {
 
     def "when i delete a person, it shall return 204"() {
         given: "i have a person"
-        Person person = new Person("Pedro",
+        com.pedrojbbruno.microservice.personservice.entities.Person person = new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro",
                 46042432800,
                 "18/10/1997",
                 "rua teste",
@@ -164,7 +162,7 @@ class PersonControllerTest extends Specification {
                 100,
                 "estado teste",
                 "pais teste")
-        repository.findById(1L) >> new Optional<Person>(person)
+        repository.findById(1L) >> new Optional<com.pedrojbbruno.microservice.personservice.entities.Person>(person)
 
         expect: "to have the Status 204"
         mvc.perform(MockMvcRequestBuilders
@@ -196,7 +194,7 @@ class PersonControllerTest extends Specification {
 
     def "when i update a non existent person, it shall return 200 and the new person"() {
         given: "i have a person"
-        Person person = new Person("Pedro",
+        com.pedrojbbruno.microservice.personservice.entities.Person person = new com.pedrojbbruno.microservice.personservice.entities.Person("Pedro",
                 46042432800,
                 "18/10/1997",
                 "rua teste",
@@ -207,7 +205,7 @@ class PersonControllerTest extends Specification {
                 "pais teste")
         repository.findById(1L) >> Optional.empty()
         repository.save(_) >> person
-        assembler.toModel(person) >> new EntityModel<Person>(person)
+        assembler.toModel(person) >> new EntityModel<com.pedrojbbruno.microservice.personservice.entities.Person>(person)
 
         expect: "to have the Status 200 and the response is the new person"
         mvc.perform(MockMvcRequestBuilders
@@ -237,8 +235,8 @@ class PersonControllerTest extends Specification {
         }
 
         @Bean
-        PersonRepresentationModelAssembler personRepresentationModelAssembler() {
-            return detachedMockFactory.Stub(PersonRepresentationModelAssembler)
+        com.pedrojbbruno.microservice.personservice.assemblers.PersonRepresentationModelAssembler personRepresentationModelAssembler() {
+            return detachedMockFactory.Stub(com.pedrojbbruno.microservice.personservice.assemblers.PersonRepresentationModelAssembler)
         }
     }
 }

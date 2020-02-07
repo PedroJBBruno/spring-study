@@ -1,10 +1,10 @@
-package com.pedrojbbruno.springmicroservice;
+package com.pedrojbbruno.microservice.eurekaservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringMicroServiceApplicationTests {
+class EurekaserviceApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,4 +1,4 @@
-package com.pedrojbbruno.springmicroservice.entities;
+package com.pedrojbbruno.microservice.personservice.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

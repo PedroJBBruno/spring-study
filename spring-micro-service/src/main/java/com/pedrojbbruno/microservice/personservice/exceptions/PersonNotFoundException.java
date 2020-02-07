@@ -1,4 +1,4 @@
-package com.pedrojbbruno.springmicroservice.exceptions;
+package com.pedrojbbruno.microservice.personservice.exceptions;
 
 public class PersonNotFoundException extends RuntimeException {
     public PersonNotFoundException(Long id) {
