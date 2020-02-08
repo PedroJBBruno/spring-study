@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Authorization Creater",
+			"name": "Criar autorização",
 			"event": [
 				{
 					"listen": "test",
