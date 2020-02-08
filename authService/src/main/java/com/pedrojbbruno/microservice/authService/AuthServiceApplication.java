@@ -1,17 +1,15 @@
-package com.pedrojbbruno.microservice.personservice;
+package com.pedrojbbruno.microservice.authService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableCaching
 @EnableEurekaClient
-public class SpringPersonServiceApplication {
+public class AuthServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringPersonServiceApplication.class, args);
+		SpringApplication.run(AuthServiceApplication.class, args);
 	}
 
 }

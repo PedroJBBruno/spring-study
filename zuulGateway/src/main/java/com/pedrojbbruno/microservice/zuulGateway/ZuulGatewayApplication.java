@@ -1,17 +1,17 @@
-package com.pedrojbbruno.microservice.personservice;
+package com.pedrojbbruno.microservice.zuulGateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
-@EnableCaching
 @EnableEurekaClient
-public class SpringPersonServiceApplication {
+@EnableZuulProxy
+public class ZuulGatewayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringPersonServiceApplication.class, args);
+		SpringApplication.run(ZuulGatewayApplication.class, args);
 	}
 
 }

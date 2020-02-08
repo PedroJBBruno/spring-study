@@ -45,7 +45,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 201 and the response is the new person"
         mvc.perform(MockMvcRequestBuilders
-            .post("/persons")
+            .post("/")
             .content(asJsonString(person))
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON))
@@ -91,7 +91,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 200 and the response is the person list"
         mvc.perform(MockMvcRequestBuilders
-                .get("/persons"))
+                .get("/"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("\$._embedded.persons.length()").value(persons.size()))
     }
@@ -112,7 +112,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 200 and the response is the person"
         mvc.perform(MockMvcRequestBuilders
-                .get("/persons/1"))
+                .get("/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("\$.name").value(person.getName()))
     }
@@ -143,7 +143,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 200 and the response is the new person"
         mvc.perform(MockMvcRequestBuilders
-                .put("/persons/1")
+                .put("/1")
                 .content(asJsonString(personUpdated))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -166,7 +166,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 204"
         mvc.perform(MockMvcRequestBuilders
-                .delete("/persons/1"))
+                .delete("/1"))
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
     }
 
@@ -176,7 +176,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 404 and the response is a custom error"
         mvc.perform(MockMvcRequestBuilders
-                .delete("/persons/1"))
+                .delete("/1"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.content().string("Could not find person 1"))
     }
@@ -187,7 +187,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 404 and the response is a custom error"
         mvc.perform(MockMvcRequestBuilders
-                .get("/persons/1"))
+                .get("/1"))
                 .andExpect(MockMvcResultMatchers.status().isNotFound())
                 .andExpect(MockMvcResultMatchers.content().string("Could not find person 1"))
     }
@@ -209,7 +209,7 @@ class PersonControllerTest extends Specification {
 
         expect: "to have the Status 200 and the response is the new person"
         mvc.perform(MockMvcRequestBuilders
-                .put("/persons/1")
+                .put("/1")
                 .content(asJsonString(person))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))

@@ -29,7 +29,7 @@ public class PersonController {
     }
 
     @Cacheable(value = "persons")
-    @GetMapping("/persons")
+    @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
     public CollectionModel<EntityModel<Person>> all() {
         return new CollectionModel<>(repository.findAll().stream()
@@ -38,14 +38,14 @@ public class PersonController {
     }
 
     @CacheEvict(value = "persons", allEntries = true)
-    @PostMapping("/persons")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public EntityModel<Person> newPerson(@RequestBody Person person) {
         return assembler.toModel(repository.save(person));
     }
 
     @Cacheable(value = "person", key = "#id")
-    @GetMapping("/persons/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EntityModel<Person> one(@PathVariable Long id) {
         return assembler.toModel(repository.findById(id)
@@ -54,7 +54,7 @@ public class PersonController {
 
 
     @CacheEvict(value = "person", key = "#id")
-    @PutMapping("/persons/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public EntityModel<Person> replacePerson(@RequestBody Person newPerson, @PathVariable Long id) {
         return repository.findById(id)
@@ -72,7 +72,7 @@ public class PersonController {
             @CacheEvict(value = "person", key = "#id"),
             @CacheEvict(value = "persons", allEntries = true)
     })
-    @DeleteMapping("/persons/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePerson(@PathVariable Long id) {
         repository.findById(id)
