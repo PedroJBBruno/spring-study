@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "5f7e8081-2269-421c-b0f7-478236a689a3",
+		"name": "Micro Service Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorization Creater",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "463ba716-2eef-4a3e-a9f9-9b67543dfac3",
+						"exec": [
+							"pm.environment.set(\"authorization\", pm.response.headers.get(\"Authorization\"));",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"authUser\",\n\t\"password\": \"zyFH&V2QGxV3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8762/auth/",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar pessoa",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37793a5c-aed3-4416-90b1-bef5bb0c0638",
+						"exec": [
+							"pm.environment.set(\"lastId\", pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{authorization}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"pedro\",\n\t\"cpf\": 46046046000,\n\t\"birthday\": \"01/01/1999\",\n\t\"adressStreet\": \"rua teste\",\n\t\"adressCity\": \"cidade teste\",\n\t\"adressNeighbourhood\": \"bairro teste\",\n\t\"adressNumber\": 100,\n\t\"adressState\": \"estado teste\",\n\t\"adressCountry\": \"pais teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8762/persons",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar todas as pessoas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8762/persons",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recuperar pessoa especifica",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8762/persons/{{lastId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"persons",
+						"{{lastId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar pessoa por id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{authorization}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"pedro\",\n\t\"cpf\": 46046046000,\n\t\"birthday\": \"01/01/1999\",\n\t\"adressStreet\": \"rua teste\",\n\t\"adressCity\": \"cidade teste\",\n\t\"adressNeighbourhood\": \"bairro teste\",\n\t\"adressNumber\": 100,\n\t\"adressState\": \"estado teste\",\n\t\"adressCountry\": \"pais teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8762/persons/{{lastId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"persons",
+						"{{lastId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar pessoa por id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{authorization}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8762/persons/{{lastId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"persons",
+						"{{lastId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
